@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\servers\CaseServer;
 use Yii;
 use frontend\models\CaseFailedDetail;
 use frontend\models\CaseSummary;
@@ -38,7 +39,7 @@ class CaseSummaryController extends Controller
     {
         $searchModel = new CaseFailedDetail();
         $dataProvider = $searchModel->search(['CaseFailedDetail' => ['summaryId' => (int)$id]]);
-        Yii::$app->cache->set('summaryId',$id);
+        Yii::$app->cache->set('summaryId', $id);
         return $this->render('view', [
             'model' => $this->findModel($id),
             'searchModel' => $searchModel,
@@ -46,22 +47,29 @@ class CaseSummaryController extends Controller
         ]);
     }
 
-    public function actionDownload(){
-        $date=Yii::$app->getRequest()->get('date')?Yii::$app->getRequest()->get('date'):date('Y-m-d');
-        $caseSummary=CaseSummary::find()
-            ->where("DATE_FORMAT(caseStartTime,'%Y-%m-%d') = '$date'")
-            ->asArray()
-            ->all();
-        $Summary=[];
-        $Summary['caseSum']=array_sum(array_column($caseSummary,'caseTotalNum'));
-        $Summary['caseFailedSum']=array_sum(array_column($caseSummary,'caseFailedNum'));
-        $Summary['caseSumId']=implode(',',array_column($caseSummary,'id'));
-        $Summary['version']=implode(',',array_unique(array_column($caseSummary,'version')));
-        $Summary['packageName']=implode(',',array_unique(array_column($caseSummary,'packageName')));
-
-        $caseFailedDetail=CaseFailedDetail::find()
-            ->where(['summaryId'=>$Summary['caseSumId']])->orderBy('')->asArray()->all();
-        var_dump($Summary);
+    public function actionDownload()
+    {
+        $date = Yii::$app->getRequest()->get('date') ? Yii::$app->getRequest()->get('date') : date('Y-m-d');
+        $caseServer = new CaseServer();
+        $caseSummary = $caseServer->getSummaryDataOfDay($date);
+        if (is_array($caseSummary) && count(array_column($caseSummary, 'id')) > 0) {
+            $caseFailedDetail = CaseFailedDetail::find()
+                ->where(['summaryId' => array_column($caseSummary, 'id')])
+                ->asArray()
+                ->all();
+        } else {
+            $caseSummary = [];
+            $caseFailedDetail = [];
+        }
+        $processedData = $caseServer->processSummaryReportData($caseSummary, $caseFailedDetail);
+        $fileDir = Yii::$app->params['fileDir'];
+        echo $content = $this->renderPartial('summary', $processedData);
+//        var_dump($fileDir . "/case_result_{$date}.html");
+        $fHand=fopen($fileDir . "/case_result_{$date}.html",'a+');
+        fwrite($fHand,$content);
+        fclose($fHand);
+        //file_put_contents($fileDir . "/case_result_{$date}.html", $content);
+        //var_dump([$content, $caseSummary, $caseFailedDetail]);
 
     }
 

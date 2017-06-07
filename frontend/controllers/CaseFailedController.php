@@ -71,7 +71,7 @@ class CaseFailedController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    /*public function actionCreate()
     {
         $model = new CaseFailedDetail();
 
@@ -82,7 +82,7 @@ class CaseFailedController extends Controller
                 'model' => $model,
             ]);
         }
-    }
+    }*/
 
     /**
      * Updates an existing CaseFailedDetail model.
@@ -90,7 +90,7 @@ class CaseFailedController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+   /* public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
@@ -101,7 +101,7 @@ class CaseFailedController extends Controller
                 'model' => $model,
             ]);
         }
-    }
+    }*/
 
     /**
      * Deletes an existing CaseFailedDetail model.
@@ -109,12 +109,12 @@ class CaseFailedController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+   /* public function actionDelete($id)
     {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
+    }*/
 
     /**
      * Finds the CaseFailedDetail model based on its primary key value.
@@ -123,12 +123,12 @@ class CaseFailedController extends Controller
      * @return CaseFailedDetail the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    /*protected function findModel($id)
     {
         if (($model = CaseFailedDetail::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-    }
+    }*/
 }
