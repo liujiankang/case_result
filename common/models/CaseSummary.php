@@ -11,6 +11,7 @@ use Yii;
  * @property string $packageName
  * @property string $version
  * @property string $module
+ * @property string $platform
  * @property string $lable
  * @property integer $caseTotalNum
  * @property integer $caseFailedNum
@@ -34,10 +35,11 @@ class CaseSummary extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['packageName'], 'required'],
             [['caseTotalNum', 'caseFailedNum'], 'integer'],
             [['caseStartTime', 'caseEndTime', 'creatTime'], 'safe'],
             [['packageName', 'module', 'lable'], 'string', 'max' => 200],
-            [['version'], 'string', 'max' => 20],
+            [['version', 'platform'], 'string', 'max' => 20],
         ];
     }
 
@@ -51,6 +53,7 @@ class CaseSummary extends \yii\db\ActiveRecord
             'packageName' => '包名',
             'version' => '版本号',
             'module' => '模块名称',
+            'platform' => '平台',
             'lable' => '标签',
             'caseTotalNum' => 'case总数',
             'caseFailedNum' => 'case失败条数',
