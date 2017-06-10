@@ -24,6 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'caseMethod',
             'caseDesc:ntext',
             'owner',
+            'step_link',
+            'log_link',
+            'screen_link',
             'creatTime',
         ],
     ]) ?>

@@ -3,7 +3,6 @@ namespace frontend\servers;
 
 use common\models\CaseSummary;
 use common\models\CaseFailedDetail;
-use Faker\Provider\zh_CN\DateTime;
 
 class CaseServer
 {

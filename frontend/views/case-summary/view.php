@@ -44,6 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'id',
 //            'summaryId',
 //            'stackLog:ntext',
+            'platform:ntext',
             'caseMethod',
             'caseDesc:ntext',
             'owner',

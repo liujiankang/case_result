@@ -123,12 +123,12 @@ class CaseFailedController extends Controller
      * @return CaseFailedDetail the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    /*protected function findModel($id)
+    protected function findModel($id)
     {
         if (($model = CaseFailedDetail::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-    }*/
+    }
 }

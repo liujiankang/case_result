@@ -8,7 +8,6 @@ use frontend\models\CaseFailedDetail;
 use frontend\models\CaseSummary;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * CaseSummaryController implements the CRUD actions for CaseSummary model.
@@ -63,14 +62,13 @@ class CaseSummaryController extends Controller
         }
         $processedData = $caseServer->processSummaryReportData($caseSummary, $caseFailedDetail);
         $fileDir = Yii::$app->params['fileDir'];
-        echo $content = $this->renderPartial('summary', $processedData);
-//        var_dump($fileDir . "/case_result_{$date}.html");
+
+        $content = $this->renderPartial('summary', $processedData);
         $fHand=fopen($fileDir . "/case_result_{$date}.html",'a+');
         fwrite($fHand,$content);
         fclose($fHand);
-        //file_put_contents($fileDir . "/case_result_{$date}.html", $content);
-        //var_dump([$content, $caseSummary, $caseFailedDetail]);
 
+        echo $content;
     }
 
     /**

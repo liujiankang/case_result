@@ -30,6 +30,7 @@ class CaseInputController extends Controller
         $summaryData['packageName'] = isset($data['packageName']) ? $data['packageName'] : '';
         $summaryData['version'] = isset($data['version']) ? $data['version'] : '';
         $summaryData['module'] = isset($data['module']) ? $data['module'] : '';
+        $summaryData['platform'] = isset($data['platform']) ? $data['platform'] : '';
         $summaryData['caseTotalNum'] = isset($data['caseTotalNum']) ? $data['caseTotalNum'] : '';
         $summaryData['caseFailedNum'] = isset($data['caseFailedNum']) ? $data['caseFailedNum'] : '';
         $summaryData['caseStartTime'] = isset($data['startTime']) ? date('Y-m-d H:i:s',$data['startTime']) : '';
@@ -50,6 +51,10 @@ class CaseInputController extends Controller
                     $caseDetailData['caseDesc'] = isset($data['desc'][$key]) ? $data['desc'][$key] : '';
                     $caseDetailData['step'] = isset($data['step'][$key]) ? $data['step'][$key] : '';
                     $caseDetailData['stackLog'] = isset($data['log'][$key]) ? $data['log'][$key] : '';
+
+                    $caseDetailData['step_link'] = isset($data['step_link'][$key]) ? $data['step_link'][$key] : '';
+                    $caseDetailData['screen_link'] = isset($data['screen_link'][$key]) ? $data['screen_link'][$key] : '';
+                    $caseDetailData['log_link'] = isset($data['log_link'][$key]) ? $data['log_link'][$key] : '';
                     if (!$CaseServer->insertFailedDetail($caseDetailData)) {
                         $result['code'] = 1;
                         $result['msg'] = $CaseServer->error;
@@ -62,16 +67,16 @@ class CaseInputController extends Controller
 
     public function actionSendEmail(){
 //        $mail= Yii::$app->mailer->compose('xiaoma',['aa'=>222]);
-        $mail= Yii::$app->mailer->compose();
+//        $mail= Yii::$app->mailer->compose();
 //        $mail->setFrom('liujiankang@wangcaigu.com')->setTo('liujiankang1@qq.com')
-        $mail->setFrom('yanjunwang@qiyi.com')->setTo('yanjunwang@qiyi.com')
-            ->setSubject('this is test email')
-            ->setTextBody('Plain text content')
-            ->setHtmlBody('<b>HTML content</b>');
-        if($mail->send())
-            echo "success";
-        else
-            echo "failse";
-        die();
+//        $mail->setFrom('yanjunwang@qiyi.com')->setTo('yanjunwang@qiyi.com')
+//            ->setSubject('this is test email')
+//            ->setTextBody('Plain text content')
+//            ->setHtmlBody('<b>HTML content</b>');
+//        if($mail->send())
+//            echo "success";
+//        else
+//            echo "failse";
+//        die();
     }
 }

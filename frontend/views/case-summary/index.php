@@ -26,6 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'version',
             'module',
             'lable',
+            'platform',
              'caseTotalNum',
             'caseFailedNum',
             [

@@ -14,6 +14,7 @@ use yii\data\ActiveDataProvider;
  * @property string $version
  * @property string $module
  * @property string $lable
+ * @property string $platform
  * @property integer $caseTotalNum
  * @property integer $caseFailedNum
  * @property string $caseStartTime
@@ -29,7 +30,7 @@ class CaseSummary extends \common\models\CaseSummary
     {
         return [
             [['id', 'caseTotalNum', 'caseFailedNum'], 'integer'],
-            [['packageName', 'version', 'module', 'lable', 'caseStartTime', 'caseEndTime', 'creatTime'], 'safe'],
+            [['packageName', 'version', 'module', 'lable','platform', 'caseStartTime', 'caseEndTime', 'creatTime'], 'safe'],
         ];
     }
 
@@ -72,6 +73,7 @@ class CaseSummary extends \common\models\CaseSummary
             'id' => $this->id,
             'caseTotalNum' => $this->caseTotalNum,
             'caseFailedNum' => $this->caseFailedNum,
+            'platform' => $this->platform,
 
         ]);
 
